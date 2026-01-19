@@ -1,25 +1,26 @@
 version: "3.7"
 services:
-  ProjectZomboidDedicatedServer:
+  pz-server:
     image: danixu86/project-zomboid-dedicated-server:latest
-    restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        # Reads STEAMAPPBRANCH from your .env file to set the build version (ARG).
-        - STEAMAPPBRANCH=${STEAMAPPBRANCH}
-    env_file:
-      - .env
-    environment:
-      STEAM_LOGIN: ${STEAM_LOGIN}
-      STEAM_PASSWORD: ${STEAM_PASSWORD}
+    build: .
+    container_name: pz-server
     ports:
       - "16261:16261/udp"
       - "16262:16262/udp"
-      - "27015:27015/tcp"
+      - "27015:27015"
     volumes:
-      # Server data
       - ./data:/home/steam/Zomboid
-      # Workshop mods folder
+      - ./local-mods:/home/steam/Zomboid/mods
+      - ./scripts:/server/scripts
       - ./workshop-mods:/home/steam/pz-dedicated/steamapps/workshop
+    environment:
+      - ADMINPASSWORD=admin123
+      - SERVERNAME=servertest
+      - STEAMAPPBRANCH=${STEAMAPPBRANCH}
+      - FORCEUPDATE=${FORCEUPDATE}
+      - LANG=es_ES.UTF-8
+      - LC_ALL=es_ES.UTF-8
+      - STEAM_LOGIN=
+      - STEAM_PASSWORD=
+    restart: unless-stopped
+
