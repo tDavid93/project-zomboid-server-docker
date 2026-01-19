@@ -92,7 +92,7 @@ fi
 
 # You can choose a different servername by using this option when starting the server.
 if [ -n "${SERVERNAME}" ]; then
-  ARGS="${ARGS} -servername \"${SERVERNAME}\""
+  ARGS="${ARGS} -servername ${SERVERNAME}"
 else
   # If not servername is set, use the default name in the next step
   SERVERNAME="servertest"
@@ -173,8 +173,7 @@ if [ -n "${WORKSHOP_IDS}" ]; then
  	echo "*** INFO: Found Workshop IDs including ${WORKSHOP_IDS} ***"
 	sed -i "s/WorkshopItems=.*/WorkshopItems=${WORKSHOP_IDS}/" "${HOMEDIR}/Zomboid/Server/${SERVERNAME}.ini"
 else
- 	echo "*** INFO: Workshop IDs is empty, clearing configuration ***"
-	sed -i 's/WorkshopItems=.*$/WorkshopItems=/' "${HOMEDIR}/Zomboid/Server/${SERVERNAME}.ini"
+ 	echo "*** INFO: Workshop IDs is empty, keeping existing configuration ***"
 fi
 
 # Fixes EOL in script file for good measure
@@ -198,7 +197,7 @@ if [ -e "${HOMEDIR}/pz-dedicated/steamapps/workshop/content/108600" ]; then
           if [ -e "${HOMEDIR}/pz-dedicated/media/maps/$string/spawnpoints.lua" ]; then
             result="{ name = \"$string\", file = \"media/maps/$string/spawnpoints.lua\" },"
             sed -i "/function SpawnRegions()/,/return {/ {    /return {/ a\
-            \\\t\t$result
+            \\t\\t$result
             }" "${HOMEDIR}/Zomboid/Server/${SERVERNAME}_spawnregions.lua"
           fi
         fi
@@ -210,11 +209,58 @@ fi
 # ERROR: ld.so: object 'libjsig.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
 export LD_LIBRARY_PATH="${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}"
 
-## Fix the permissions in the data and workshop folders
-chown -R 1000:1000 /home/steam/pz-dedicated/steamapps/workshop /home/steam/Zomboid
-# When binding a host folder with Docker to the container, the resulting folder has these permissions "d---" (i.e. NO `rwx`) 
-# which will cause runtime issues after launching the server.
-# Fix it the adding back `rwx` permissions for the file owner (steam user)
-chmod 755 /home/steam/Zomboid
+# Ensure Steam library folders exist for workshop downloads.
+mkdir -p /home/steam/.steam
+mkdir -p /home/steam/Steam/steamapps
+mkdir -p /home/steam/pz-dedicated/steamapps/workshop/content/108600
+mkdir -p /home/steam/pz-dedicated/steamapps/workshop/downloads
+if [ ! -f /home/steam/Steam/steamapps/libraryfolders.vdf ]; then
+  cat > /home/steam/Steam/steamapps/libraryfolders.vdf <<'VDF'
+"libraryfolders"
+{
+  "0"
+  {
+    "path" "/home/steam/pz-dedicated"
+    "label" ""
+    "contentid" "1"
+  }
+}
+VDF
+fi
 
-su - steam -c "export LANG=${LANG} && export LD_LIBRARY_PATH=\"${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}\" && cd ${STEAMAPPDIR} && pwd && ./start-server.sh ${ARGS}"
+# Seed defaultRoles when missing to avoid startup NPEs on some upgrades.
+if command -v sqlite3 >/dev/null 2>&1; then
+  DB_PATH="${HOMEDIR}/Zomboid/db/${SERVERNAME}.db"
+  if [ -f "${DB_PATH}" ]; then
+    ROLE_COUNT="$(sqlite3 "${DB_PATH}" "select count(*) from defaultRoles;" 2>/dev/null || echo "0")"
+    if [ "${ROLE_COUNT}" = "0" ]; then
+      echo "*** INFO: Seeding defaultRoles in ${DB_PATH} ***"
+      sqlite3 "${DB_PATH}" <<'SQL'
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForBanned', id FROM role WHERE name='banned';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForNewUser', id FROM role WHERE name='user';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForUser', id FROM role WHERE name='user';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForPriorityUser', id FROM role WHERE name='priority';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForObserver', id FROM role WHERE name='observer';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForGM', id FROM role WHERE name='gm';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForOverseer', id FROM role WHERE name='gm';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForModerator', id FROM role WHERE name='moderator';
+INSERT INTO defaultRoles(name, role) SELECT 'defaultForAdmin', id FROM role WHERE name='admin';
+SQL
+    fi
+  fi
+fi
+
+## Fix the permissions in the data and workshop folders (only when running as root)
+if [ "$(id -u)" -eq 0 ]; then
+  chown -R 1000:1000 /home/steam/pz-dedicated/steamapps/workshop /home/steam/Zomboid
+  # When binding a host folder with Docker to the container, the resulting folder has these permissions "d---" (i.e. NO `rwx`) 
+  # which will cause runtime issues after launching the server.
+  # Fix it by adding back `rwx` permissions for the file owner (steam user)
+  chmod 755 /home/steam/Zomboid
+  su - steam -c "export LANG=${LANG} && export LD_LIBRARY_PATH=\"${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}\" && cd ${STEAMAPPDIR} && pwd && ./start-server.sh ${ARGS}"
+else
+  export LANG=${LANG}
+  export LD_LIBRARY_PATH="${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}"
+  cd ${STEAMAPPDIR}
+  exec ./start-server.sh ${ARGS}
+fi
