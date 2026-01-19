@@ -11,6 +11,9 @@ services:
         - STEAMAPPBRANCH=${STEAMAPPBRANCH}
     env_file:
       - .env
+    environment:
+      STEAM_LOGIN: ${STEAM_LOGIN}
+      STEAM_PASSWORD: ${STEAM_PASSWORD}
     ports:
       - "16261:16261/udp"
       - "16262:16262/udp"
