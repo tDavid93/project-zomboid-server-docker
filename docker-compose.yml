@@ -1,8 +1,9 @@
-version: "3.7"
 services:
   pz-server:
-    image: danixu86/project-zomboid-dedicated-server:latest
-    build: .
+    build:
+      context: .
+      args:
+        STEAMAPPBRANCH: ${STEAMAPPBRANCH:-unstable}
     container_name: pz-server
     ports:
       - "16261:16261/udp"
@@ -16,11 +17,8 @@ services:
     environment:
       - ADMINPASSWORD=admin123
       - SERVERNAME=servertest
-      - STEAMAPPBRANCH=${STEAMAPPBRANCH}
+      - STEAMAPPBRANCH=${STEAMAPPBRANCH:-unstable}
       - FORCEUPDATE=${FORCEUPDATE}
-      - LANG=es_ES.UTF-8
-      - LC_ALL=es_ES.UTF-8
-      - STEAM_LOGIN=
-      - STEAM_PASSWORD=
+      - LANG=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
     restart: unless-stopped
-

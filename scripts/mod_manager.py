@@ -374,7 +374,7 @@ def cmd_tui(args, index):
 
 def main():
     parser = argparse.ArgumentParser(description="Manage PZ server Mods list and resolve workshop mod names.")
-    parser.add_argument("--config", default="config/Server/servertest.ini", type=Path)
+    parser.add_argument("--config", default="data/Server/servertest.ini", type=Path)
 
     sub = parser.add_subparsers(dest="cmd", required=True)
 

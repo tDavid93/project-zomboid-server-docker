@@ -16,7 +16,7 @@ fi
 
 if [ "${FORCEUPDATE}" == "1" ]; then
   echo "FORCEUPDATE variable is set, so the server will be updated right now"
-  bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" +login ${STEAM_LOGIN} ${STEAM_PASSWORD} +app_update "${STEAMAPPID}" -beta "${STEAMAPPBRANCH}" validate +quit
+  bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" +login anonymous +app_update "${STEAMAPPID}" -beta "${STEAMAPPBRANCH}" validate +quit
 fi
 
 
@@ -141,7 +141,7 @@ if [ -n "${STEAMPORT1}" ]; then
   ARGS="${ARGS} -steamport1 ${STEAMPORT1}"
 fi
 if [ -n "${STEAMPORT2}" ]; then
-  ARGS="${ARGS} -steamport2 ${STEAMPORT1}"
+  ARGS="${ARGS} -steamport2 ${STEAMPORT2}"
 fi
 
 if [ -n "${PASSWORD}" ]; then

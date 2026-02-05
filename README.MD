@@ -144,3 +144,13 @@ In the scripts folders there are three scripts:
 * entry.sh: The script used in the image to start the server
 * search_folder.sh: Script to search through mod folders for any maps
 * get_updates.sh: will perform a search of the latest version on the forum and the website to download and build the latest stable and unstable version. The local image will be created and it will try to upload the image to the Dockerhub website, but it will fail by the lack of permissions.
+
+## Rollback (server config changes)
+
+If a config change needs to be rolled back, restore the most recent backup and restart the server.
+
+Example (2026-02-05 gameplay tuning):
+
+```bash
+bash scripts/restore.sh data/backups/backup-servertest-20260206-004059.tar.gz
+```
