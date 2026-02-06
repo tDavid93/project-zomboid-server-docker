@@ -7,7 +7,7 @@
 - No changes.
 
 ## Infrastructure
-- No changes.
+- Added optional workshop auto-update watcher with grace period, idle-restart, and RCON broadcasts.
 
 ## Fixes
 - No changes.

@@ -209,6 +209,12 @@ fi
 # ERROR: ld.so: object 'libjsig.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
 export LD_LIBRARY_PATH="${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}"
 
+# Optional workshop auto-update watcher.
+AUTOUPDATE_MODS="${AUTOUPDATE_MODS:-0}"
+if [ "${AUTOUPDATE_MODS}" = "1" ]; then
+  echo "*** INFO: Workshop auto-update enabled (interval ${AUTOUPDATE_INTERVAL:-1800}s)."
+fi
+
 # Ensure Steam library folders exist for workshop downloads.
 mkdir -p /home/steam/.steam
 mkdir -p /home/steam/Steam/steamapps
@@ -257,10 +263,27 @@ if [ "$(id -u)" -eq 0 ]; then
   # which will cause runtime issues after launching the server.
   # Fix it by adding back `rwx` permissions for the file owner (steam user)
   chmod 755 /home/steam/Zomboid
-  su - steam -c "export LANG=${LANG} && export LD_LIBRARY_PATH=\"${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}\" && cd ${STEAMAPPDIR} && pwd && ./start-server.sh ${ARGS}"
+  if [ "${AUTOUPDATE_MODS}" = "1" ]; then
+    su - steam -c "/server/scripts/auto_update_mods.sh" &
+    AUTOUPDATE_PID=$!
+  fi
+  su - steam -c "export LANG=${LANG} && export LD_LIBRARY_PATH=\"${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}\" && cd ${STEAMAPPDIR} && pwd && ./start-server.sh ${ARGS}" &
+  SERVER_PID=$!
 else
   export LANG=${LANG}
   export LD_LIBRARY_PATH="${STEAMAPPDIR}/jre64/lib:${LD_LIBRARY_PATH}"
   cd ${STEAMAPPDIR}
-  exec ./start-server.sh ${ARGS}
+  if [ "${AUTOUPDATE_MODS}" = "1" ]; then
+    /server/scripts/auto_update_mods.sh &
+    AUTOUPDATE_PID=$!
+  fi
+  ./start-server.sh ${ARGS} &
+  SERVER_PID=$!
 fi
+
+wait "${SERVER_PID}"
+SERVER_EXIT=$?
+if [ -n "${AUTOUPDATE_PID:-}" ]; then
+  kill "${AUTOUPDATE_PID}" 2>/dev/null || true
+fi
+exit "${SERVER_EXIT}"
