@@ -1395,6 +1395,16 @@ SandboxVars = {
         -- Min: 1 Max: 500 Default: 100
         MaxDisposableLighterUses = 100,
     },
+    PlayersOnMap = {
+        Enabled = true,
+        ShowPlayerNames = true,
+        ShowMyName = true,
+        ShowOnlyFaction = false,
+        ShowDeadPlayers = true,
+        FontDebugConsole = false,
+        -- Min: -1 Max: 999999999 Default: 999999999
+        MaxDistance = 999999999,
+    },
     ReactiveSoundEvents = {
         -- Min: 60 Max: 2880 Default: 240
         MinEventCooldown = 240,
