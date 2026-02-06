@@ -154,3 +154,9 @@ Example (2026-02-05 gameplay tuning):
 ```bash
 bash scripts/restore.sh data/backups/backup-servertest-20260206-004059.tar.gz
 ```
+
+Example (2026-02-06 case-sensitive mod fix for FWO Treadmill & BenchPress):
+
+```bash
+bash scripts/restore.sh data/backups/backup-servertest-20260206-161129.tar.gz
+```

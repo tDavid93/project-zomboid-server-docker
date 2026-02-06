@@ -234,6 +234,11 @@ if [ ! -f /home/steam/Steam/steamapps/libraryfolders.vdf ]; then
 VDF
 fi
 
+# Fix common Linux case-sensitive path issues in workshop mods.
+if [ -x /server/scripts/fix_case_sensitive_mod_paths.sh ]; then
+  /server/scripts/fix_case_sensitive_mod_paths.sh
+fi
+
 # Seed defaultRoles when missing to avoid startup NPEs on some upgrades.
 if command -v sqlite3 >/dev/null 2>&1; then
   DB_PATH="${HOMEDIR}/Zomboid/db/${SERVERNAME}.db"
