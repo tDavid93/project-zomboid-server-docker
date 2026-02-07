@@ -234,6 +234,17 @@ if [ ! -f /home/steam/Steam/steamapps/libraryfolders.vdf ]; then
 VDF
 fi
 
+# Optional workshop prefetch before server start.
+PREFETCH_WORKSHOP="${PREFETCH_WORKSHOP:-0}"
+if [ "${PREFETCH_WORKSHOP}" = "1" ] && [ -x /server/scripts/prefetch_workshop.sh ]; then
+  echo "*** INFO: Prefetching workshop mods before server start."
+  if [ "$(id -u)" -eq 0 ]; then
+    su - steam -c "/server/scripts/prefetch_workshop.sh" || exit 1
+  else
+    /server/scripts/prefetch_workshop.sh || exit 1
+  fi
+fi
+
 # Fix common Linux case-sensitive path issues in workshop mods.
 if [ -x /server/scripts/fix_case_sensitive_mod_paths.sh ]; then
   /server/scripts/fix_case_sensitive_mod_paths.sh

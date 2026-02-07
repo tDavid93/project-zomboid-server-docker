@@ -7,7 +7,7 @@ SandboxVars = {
     -- 4 = Normal
     -- 5 = Low
     -- 6 = None
-    Zombies = 3,
+    Zombies = 4,
     -- How zombies are distributed across the map. Default = Urban Focused
     -- 1 = Urban Focused
     -- 2 = Uniform
@@ -19,7 +19,7 @@ SandboxVars = {
     -- 2 = Normal
     -- 3 = Low
     -- 4 = None
-    ZombieRespawn = 2,
+    ZombieRespawn = 3,
     -- Zombie allowed to migrate to empty cells.
     ZombieMigrate = true,
     -- Default = 1 Hour, 30 Minutes
@@ -128,49 +128,49 @@ SandboxVars = {
     -- 6 = 0-5 Years
     AlarmDecay = 2,
     -- How long after the default start date (July 9, 1993) that plumbing fixtures (eg. sinks) stop being infinite sources of water. Min: -1 Max: 2147483647 Default: 14
-    WaterShutModifier = 14,
+    WaterShutModifier = 16,
     -- How long after the default start date (July 9, 1993) that the world's electricity turns off for good. Min: -1 Max: 2147483647 Default: 14
-    ElecShutModifier = 14,
+    ElecShutModifier = 17,
     -- How long alarm batteries can last for after the power shuts off. Min: -1 Max: 2147483647 Default: 14
     AlarmDecayModifier = 14,
     -- Any food that can rot or spoil. Min: 0.00 Max: 4.00 Default: 0.60
-    FoodLootNew = 0.6,
+    FoodLootNew = 0.4,
     -- All items that can be read, includes fliers Min: 0.00 Max: 4.00 Default: 0.60
-    LiteratureLootNew = 0.6,
+    LiteratureLootNew = 0.4,
     -- Medicine, bandages and first aid tools. Min: 0.00 Max: 4.00 Default: 0.60
-    MedicalLootNew = 0.6,
+    MedicalLootNew = 0.4,
     -- Fishing Rods, Tents, camping gear etc. Min: 0.00 Max: 4.00 Default: 0.60
-    SurvivalGearsLootNew = 0.6,
+    SurvivalGearsLootNew = 0.4,
     -- Canned and dried food, beverages. Min: 0.00 Max: 4.00 Default: 0.60
-    CannedFoodLootNew = 0.6,
+    CannedFoodLootNew = 0.4,
     -- Weapons that are not tools in other categories. Min: 0.00 Max: 4.00 Default: 0.60
-    WeaponLootNew = 0.6,
+    WeaponLootNew = 0.4,
     -- Also includes weapon attachments. Min: 0.00 Max: 4.00 Default: 0.60
-    RangedWeaponLootNew = 0.6,
+    RangedWeaponLootNew = 0.4,
     -- Loose ammo, boxes and magazines. Min: 0.00 Max: 4.00 Default: 0.60
-    AmmoLootNew = 0.6,
+    AmmoLootNew = 0.4,
     -- Vehicle parts and the tools needed to install them. Min: 0.00 Max: 4.00 Default: 0.60
-    MechanicsLootNew = 0.6,
+    MechanicsLootNew = 0.4,
     -- Everything else. Also affects foraging for all items in Town/Road zones. Min: 0.00 Max: 4.00 Default: 0.60
-    OtherLootNew = 0.6,
+    OtherLootNew = 0.4,
     -- All wearable items that are not containers. Min: 0.00 Max: 4.00 Default: 0.60
-    ClothingLootNew = 0.6,
+    ClothingLootNew = 0.4,
     -- Backpacks and other wearable/equippable containers, eg. cases. Min: 0.00 Max: 4.00 Default: 0.60
-    ContainerLootNew = 0.6,
+    ContainerLootNew = 0.4,
     -- Keys for buildings/cars, key rings, and locks. Min: 0.00 Max: 4.00 Default: 0.60
-    KeyLootNew = 0.6,
+    KeyLootNew = 0.4,
     -- VHS tapes and CDs. Min: 0.00 Max: 4.00 Default: 0.60
-    MediaLootNew = 0.6,
+    MediaLootNew = 0.4,
     -- Spiffo items, plushies, and other collectible keepsake items eg. Photos. Min: 0.00 Max: 4.00 Default: 0.60
-    MementoLootNew = 0.6,
+    MementoLootNew = 0.4,
     -- Items that are used in cooking, including those (eg. knives) which can be weapons. Does not include food. Includes both usable and unusable items. Min: 0.00 Max: 4.00 Default: 0.60
-    CookwareLootNew = 0.6,
+    CookwareLootNew = 0.4,
     -- Items and weapons that are used as ingredients for crafting or building. This is a general category that does not include items belonging to other categories such as Cookware or Medical. Does not include Tools. Min: 0.00 Max: 4.00 Default: 0.60
-    MaterialLootNew = 0.6,
+    MaterialLootNew = 0.4,
     -- Items and weapons which are used in both animal and plant agriculture, such as Seeds, Trowels, or Shovels. Min: 0.00 Max: 4.00 Default: 0.60
-    FarmingLootNew = 0.6,
+    FarmingLootNew = 0.4,
     -- Items and weapons which are Tools but don't fit in other categories such as Mechanics or Farming. Min: 0.00 Max: 4.00 Default: 0.60
-    ToolLootNew = 0.6,
+    ToolLootNew = 0.4,
     -- <BHC> [!] It is recommended that you DO NOT change this. [!] <RGB:1,1,1>   Can be used to adjust the number of rolls made on loot tables when spawning loot. Will not reduce the number of rolls below 1. Can negatively affect performance if set to high values. It is highly recommended that this not be changed. Min: 0.10 Max: 100.00 Default: 1.00
     RollsMultiplier = 1.0,
     -- A comma-separated list of item types that won't spawn as ordinary loot.
@@ -213,7 +213,7 @@ SandboxVars = {
     -- 3 = Normal (100 Days)
     -- 4 = Slow (200 Days)
     -- 5 = Very Slow (500 Days)
-    ErosionSpeed = 3,
+    ErosionSpeed = 2,
     -- For a custom Erosion Speed. Zero means use the Erosion Speed option. Maximum is 36,500 days (approximately 100 years). Min: -1 Max: 36500 Default: 0
     ErosionDays = 0,
     -- The speed of plant growth. Default = Normal
@@ -232,7 +232,7 @@ SandboxVars = {
     -- 6 = 8 Weeks
     -- 7 = 10 Weeks
     -- 8 = 12 Weeks
-    CompostTime = 2,
+    CompostTime = 1,
     -- How fast the player's hunger, thirst, and fatigue will decrease. Default = Normal
     -- 1 = Very Fast
     -- 2 = Fast
@@ -337,12 +337,12 @@ SandboxVars = {
     -- 2 = Once
     -- 3 = Sometimes
     -- 4 = Often
-    Helicopter = 2,
+    Helicopter = 3,
     -- How often zombie-attracting metagame events like distant gunshots will occur. Default = Sometimes
     -- 1 = Never
     -- 2 = Sometimes
     -- 3 = Often
-    MetaEvent = 2,
+    MetaEvent = 3,
     -- How often events during the player's sleep, like nightmares, occur. Default = Never
     -- 1 = Never
     -- 2 = Sometimes
@@ -397,7 +397,7 @@ SandboxVars = {
     -- 3 = High
     InjurySeverity = 2,
     -- How long, in hours, before dead zombie bodies disappear from the world.  If 0, maggots will not spawn on corpses. Min: -1.00 Max: 2147483647.00 Default: 216.00
-    HoursForCorpseRemoval = 216.0,
+    HoursForCorpseRemoval = 168.0,
     -- The impact that nearby decaying bodies has on the player's health and emotions. Default = Normal
     -- 1 = None
     -- 2 = Low
@@ -423,7 +423,7 @@ SandboxVars = {
     -- If fires spread when started.
     FireSpread = true,
     -- Number of in-game days before rotten food is removed from the map.  -1 means rotten food is never removed. Min: -1 Max: 2147483647 Default: -1
-    DaysForRottenFoodRemoval = -1,
+    DaysForRottenFoodRemoval = 240,
     -- If enabled, generators will work on exterior tiles.  This will allow, for example, the powering of gas pumps.
     AllowExteriorGenerator = true,
     -- Maximum intensity of fog. Default = Normal
@@ -449,7 +449,7 @@ SandboxVars = {
     -- 5 = Often
     -- 6 = Very Often
     -- 7 = Always Tries
-    SurvivorHouseChance = 3,
+    SurvivorHouseChance = 4,
     -- The chance of road stories (eg. police roadblocks) spawning. Default = Rare
     -- 1 = Never
     -- 2 = Extremely Rare
@@ -458,7 +458,7 @@ SandboxVars = {
     -- 5 = Often
     -- 6 = Very Often
     -- 7 = Always Tries
-    VehicleStoryChance = 3,
+    VehicleStoryChance = 4,
     -- The chance of stories specific to map zones (eg. a campsite in a forest) spawning. Default = Rare
     -- 1 = Never
     -- 2 = Extremely Rare
@@ -467,7 +467,7 @@ SandboxVars = {
     -- 5 = Often
     -- 6 = Very Often
     -- 7 = Always Tries
-    ZoneStoryChance = 3,
+    ZoneStoryChance = 4,
     -- Allows you to select from every piece of clothing in the game when customizing your character
     AllClothesUnlocked = false,
     -- If tainted water will show a warning marking it as such.
@@ -480,7 +480,7 @@ SandboxVars = {
     -- 3 = Low
     -- 4 = Normal
     -- 5 = High
-    CarSpawnRate = 3,
+    CarSpawnRate = 4,
     -- General engine loudness to zombies. Min: 0.00 Max: 100.00 Default: 1.00
     ZombieAttractionMultiplier = 1.0,
     -- Whether found vehicles are locked, need keys to start etc.
@@ -496,7 +496,7 @@ SandboxVars = {
     -- If enabled, gas pumps will never run out of fuel
     FuelStationGasInfinite = false,
     -- The minimum amount of gasoline that can spawn in gas pumps. Check the "Advanced" box below to use a custom amount. Min: 0.00 Max: 1.00 Default: 0.00
-    FuelStationGasMin = 0.0,
+    FuelStationGasMin = 0.1,
     -- The maximum amount of gasoline that can spawn in gas pumps. Check the "Advanced" box below to use a custom amount. Min: 0.00 Max: 1.00 Default: 0.70
     FuelStationGasMax = 0.7,
     -- The chance, as a percentage, that individual gas pumps will initially have no fuel. Min: 0 Max: 100 Default: 20
@@ -510,7 +510,7 @@ SandboxVars = {
     -- 6 = Very Often
     LockedCar = 3,
     -- How gas-hungry vehicles are. Min: 0.00 Max: 100.00 Default: 1.00
-    CarGasConsumption = 1.0,
+    CarGasConsumption = 0.8,
     -- General condition discovered vehicles will be in. Default = Low
     -- 1 = Very Low
     -- 2 = Low
@@ -545,7 +545,7 @@ SandboxVars = {
     -- If the player can get injured from being in a car accident.
     PlayerDamageFromCrash = true,
     -- How many in-game hours before a wailing siren shuts off. Min: 0.00 Max: 168.00 Default: 0.00
-    SirenShutoffHours = 0.0,
+    SirenShutoffHours = 0.4,
     -- The chance of finding a vehicle with gas in its tank. Default = Low
     -- 1 = Low
     -- 2 = Normal
@@ -677,9 +677,9 @@ SandboxVars = {
     -- 1 = In and Around Bodies
     -- 2 = In Bodies Only
     -- 3 = Never
-    MaggotSpawn = 1,
+    MaggotSpawn = 2,
     -- The higher the value, the longer lightbulbs last before breaking.  If 0, lightbulbs will never break.  Does not affect vehicle headlights. Min: 0.00 Max: 1000.00 Default: 1.00
-    LightBulbLifespan = 1.0,
+    LightBulbLifespan = 1.2,
     -- The abundance of fish in rivers and lakes. Default = Normal
     -- 1 = Very Poor
     -- 2 = Poor
@@ -692,7 +692,7 @@ SandboxVars = {
     -- When a skill is at this level or above, scrapping furniture does not provide XP for the relevant skill. Does not apply to Electrical. Min: 0 Max: 10 Default: 0
     LevelForDismantleXPCutoff = 0,
     -- Number of days before old blood splats are removed. Removal happens when map chunks are loaded. 0 means they will never disappear. Min: 0 Max: 365 Default: 0
-    BloodSplatLifespanDays = 0,
+    BloodSplatLifespanDays = 2,
     -- Number of days before one can benefit from reading previously read literature items. Min: 1 Max: 365 Default: 90
     LiteratureCooldown = 90,
     -- If there are diminishing returns on bonus trait points provided from selecting multiple negative traits. Default = None
@@ -752,11 +752,13 @@ SandboxVars = {
     -- Chance to turn a dirt floor into a clay floor. Applies to rivers. Min: 0.00 Max: 1.00 Default: 0.05
     ClayRiverChance = 0.05,
     -- Min: 1 Max: 100 Default: 20
-    GeneratorTileRange = 20,
+    GeneratorTileRange = 25,
     -- How many levels both above and below a generator it can provide with electricity. Min: 1 Max: 15 Default: 3
     GeneratorVerticalPowerRange = 3,
     -- Min: -1 Max: 100 Default: -1
     BAM_Server_MinSuccessChance = -1,
+    -- Min: 0.00 Max: 9999.00 Default: 20.00
+    AmmoLootDropFirearmsB42 = 20.0,
     VRO_EnableEngineRebuild = false,
     VRO_UseVanillaFixingRecipes = false,
     Basement = {
@@ -772,7 +774,7 @@ SandboxVars = {
     },
     Map = {
         -- If enabled, a mini-map window will be available.
-        AllowMiniMap = false,
+        AllowMiniMap = true,
         -- If enabled, the world map can be accessed.
         AllowWorldMap = true,
         -- If enabled, the world map will be completely filled in on starting the game.
@@ -800,7 +802,7 @@ SandboxVars = {
         -- 2 = Normal
         -- 3 = Fragile
         -- 4 = Random
-        Toughness = 2,
+        Toughness = 4,
         -- How the Knox Virus spreads. Default = Blood and Saliva
         -- 1 = Blood and Saliva
         -- 2 = Saliva Only
@@ -853,14 +855,14 @@ SandboxVars = {
         -- 3 = Poor
         -- 4 = Random
         -- 5 = Random between Normal and Poor
-        Sight = 2,
+        Sight = 5,
         -- Zombie hearing radius. Default = Random between Normal and Poor
         -- 1 = Pinpoint
         -- 2 = Normal
         -- 3 = Poor
         -- 4 = Random
         -- 5 = Random between Normal and Poor
-        Hearing = 2,
+        Hearing = 5,
         -- Activates the new advanced stealth mechanics, which allows you to hide from zombies behind cars, takes traits and weather into account, and much more.
         SpottedLogic = true,
         -- If zombies that have not seen/heard player can attack doors and constructions while roaming.
@@ -914,9 +916,9 @@ SandboxVars = {
         -- The day when the population reaches its peak. Min: 1 Max: 365 Default: 28
         PopulationPeakDay = 28,
         -- The number of hours that must pass before zombies may respawn in a cell. If 0, spawning is disabled. Min: 0.00 Max: 8760.00 Default: 72.00
-        RespawnHours = 168.0,
+        RespawnHours = 216.0,
         -- The number of hours that a chunk must be unseen before zombies may respawn in it. Min: 0.00 Max: 8760.00 Default: 16.00
-        RespawnUnseenHours = 72.0,
+        RespawnUnseenHours = 48.0,
         -- The fraction of a cell's desired population that may respawn every RespawnHours. Min: 0.00 Max: 1.00 Default: 0.10
         RespawnMultiplier = 0.05,
         -- The number of hours that must pass before zombies migrate  to empty parts of the same cell. If 0, migration is disabled. Min: 0.00 Max: 8760.00 Default: 12.00

@@ -1,6 +1,6 @@
 # AGENTS.md — Project Zomboid Modded Server (Codex Operating Manual)
 
-This repository is a **modded Project Zomboid dedicated server** managed via Docker Compose.
+This repository is a **modded Project Zomboid build 42 dedicated server** managed via Docker Compose.
 Codex is expected to:
 - configure the server safely and reproducibly
 - diagnose crashes / mod issues using logs + config
@@ -143,6 +143,22 @@ If a task asks for “auto update”, Codex must implement it with:
 - a toggle env var
 - a “lock” or “pinned version” option if feasible
 - a pre-update backup
+
+### 5.5 Build 42 Mods Config Format (Mandatory Reference)
+Build 42 multiplayer/dedicated setups commonly require a different `Mods=` format than B41.
+
+**Codex MUST follow the format rules defined here:**
+- `docs/B42_MODS_FORMAT.md`
+
+Repository policy for B42:
+- `WorkshopItems=` is a semicolon-separated list of numeric workshop IDs.
+- `Mods=` is a semicolon-separated list of ModIDs, and on B42 MP it should use the
+  **backslash-prefixed entry format**:
+  - Example: `Mods=\ModA;\ModB;\ModC`
+- Mod load order is the order in `Mods=`.
+- If clients fail with Lua mismatch/checksum-type issues, verify:
+  - `DoLuaChecksum=false`
+
 
 ---
 
